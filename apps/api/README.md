@@ -30,7 +30,6 @@ Configure as seguintes variáveis de ambiente para funcionamento local:
 - `JWT_SECRET` — Segredo para assinar tokens JWT
 - `JWT_EXPIRES_IN` — Tempo de expiração do token (ex: '1d')
 - `AZURE_CLIENT_ID` — Client ID do app registrado no Azure
-- `AZURE_TENANT_ID` — Tenant ID do Azure
 - `TEST_OUTLOOK_EMAIL` — E-mail de teste para login Microsoft
 - `TEST_OUTLOOK_USER_NAME` — Nome do usuário de teste
 

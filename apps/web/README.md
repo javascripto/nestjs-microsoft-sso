@@ -29,7 +29,6 @@ Crie um arquivo `.env` na raiz do projeto com:
 
 - `VITE_API_URL` — URL da API backend (ex: http://localhost:3000)
 - `VITE_AZURE_CLIENT_ID` — Client ID do app registrado no Azure
-- `VITE_AZURE_TENANT_ID` — Tenant ID do Azure
 
 ## Comandos
 
@@ -71,4 +70,27 @@ yarn format
 - O frontend espera que a API esteja rodando e configurada corretamente.
 - O token JWT é salvo no `localStorage` e enviado em cada requisição.
 - Para produção, configure corretamente as URLs de redirect no Azure e na API.
+
+## Configurar Scope da API no Azure (Expose an API)
+
+Para que o frontend consiga solicitar um access token válido para a sua API, você precisa expor um scope delegado na aplicação da API no Azure AD e usar esse scope no frontend.
+
+Passos rápidos:
+
+1. No Portal do Azure, vá em **Azure Active Directory > App registrations** e selecione a aplicação que representa sua API.
+2. Em **Expose an API**:
+   - Verifique o **Application ID URI** (por exemplo `api://<CLIENT_ID>`). Se necessário, ajuste para `api://<your-api-client-id>`.
+   - Clique em **Add a scope** e crie um scope delegado (ex.: `access_as_user`). Preencha o nome do scope, o display name e a descrição.
+   - Marque o scope como **Enabled**.
+3. No frontend, defina a variável de ambiente com o scope que você criou (substitua `<your-api-client-id>` e `access_as_user` caso diferente):
+
+```env
+VITE_AZURE_API_SCOPE=api://<your-api-client-id>/access_as_user
+```
+
+4. Reinicie o servidor de desenvolvimento do frontend e limpe `sessionStorage`/`localStorage` (há botão "Limpar dados da aplicação" na tela de login) antes de testar.
+
+Notas:
+- Não use `/.default` combinado com `openid`/`profile`/`offline_access` em uma mesma requisição — para SPAs solicite um scope delegado como `api://<clientId>/access_as_user`.
+- Documentação Microsoft: https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent
 

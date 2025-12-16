@@ -10,14 +10,14 @@ export class AzureADStrategy extends PassportStrategy(
 ) {
   constructor(configService: ConfigService) {
     const clientID = configService.getOrThrow<string>('AZURE_CLIENT_ID');
-    const tenantId = configService.getOrThrow<string>('AZURE_TENANT_ID');
     const baseUrl = 'https://login.microsoftonline.com';
-    const identityMetadata = `${baseUrl}/${tenantId}/v2.0/.well-known/openid-configuration`;
+    const identityMetadata = `${baseUrl}/common/v2.0/.well-known/openid-configuration`;
     super({
       clientID,
-      audience: clientID,
+      // Allow both the Client ID (GUID) and the App ID URI as valid audiences
+      audience: [clientID, `api://${clientID}`],
       loggingLevel: 'info',
-      validateIssuer: true,
+      validateIssuer: false,
       passReqToCallback: false,
       identityMetadata: identityMetadata,
     });
