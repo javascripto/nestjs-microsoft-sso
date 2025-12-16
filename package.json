@@ -1,0 +1,32 @@
+{
+  "name": "ms-sso",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently \"npm run start:dev -w api\" \"npm run dev -w web\"",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "test:e2e": "npm run test:e2e --workspaces",
+    "prepare": "husky || true",
+    "lint": "biome lint --write",
+    "format": "biome format --write",
+    "biome:check": "biome check --write"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --write --organize-imports-enabled=true"
+    ]
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.3",
+    "concurrently": "^9.2.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1"
+    }
+  }
+}
