@@ -1,12 +1,13 @@
 
-# Web - Frontend React com Autenticação (JWT e Microsoft)
+# Web - Frontend React com Autenticação (JWT, Microsoft e Google)
 
-Este projeto é o frontend React do sistema de autenticação, consumindo a API de backend para login via e-mail/senha (JWT) e login com conta Microsoft (Azure AD). Utiliza Vite, React 19, TypeScript, TailwindCSS e MSAL.
+Este projeto é o frontend React do sistema de autenticação, consumindo a API de backend para login via e-mail/senha (JWT), login com conta Microsoft (Azure AD) e login com conta Google. Utiliza Vite, React 19, TypeScript, TailwindCSS, MSAL e Google Identity Services.
 
 ## Funcionalidades
 
 - Login com e-mail e senha (JWT)
 - Login com conta Microsoft (Azure AD)
+- Login com conta Google
 - Proteção de rotas (apenas usuários autenticados acessam o dashboard)
 - Contexto global de autenticação
 - Toasts de feedback e UX moderna
@@ -29,6 +30,7 @@ Crie um arquivo `.env` na raiz do projeto com:
 
 - `VITE_API_URL` — URL da API backend (ex: http://localhost:3000)
 - `VITE_AZURE_CLIENT_ID` — Client ID do app registrado no Azure
+- `VITE_GOOGLE_CLIENT_ID` — Client ID do app registrado no Google Cloud Console
 
 ## Comandos
 
@@ -51,8 +53,8 @@ yarn format
 
 1. **Login com e-mail/senha:**
    - Usuário preenche e-mail e senha, recebe JWT e acessa rotas protegidas.
-2. **Login com Microsoft:**
-   - Usuário faz login via popup/redirect do Azure AD, token é trocado por JWT da API.
+2. **Login com Microsoft / Google:**
+   - Usuário faz login via popup/redirect do Azure AD ou Google One Tap/Button, token é trocado por JWT da API.
 3. **Proteção de rotas:**
    - Apenas usuários autenticados acessam `/dashboard`.
 
@@ -63,6 +65,7 @@ yarn format
 - [TypeScript](https://www.typescriptlang.org/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [MSAL React](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-react)
+- [Google Identity Services](https://developers.google.com/identity/gsi/web)
 - [React Router](https://reactrouter.com/)
 
 ## Observações

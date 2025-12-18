@@ -4,6 +4,7 @@ import { AzureADStrategy } from '@/modules/auth/azure-ad.strategy';
 import { JwtStrategy } from '@/modules/auth/jwt.strategy';
 import {
   LoginWithEmailUseCase,
+  LoginWithGoogleUseCase,
   LoginWithMicrosoftUseCase,
   ValidateCredentialsUseCase,
 } from '@/modules/auth/use-cases';
@@ -38,6 +39,7 @@ import { StringValue } from 'ms';
     UsersService,
     AzureADStrategy,
     LoginWithEmailUseCase,
+    LoginWithGoogleUseCase,
     LoginWithMicrosoftUseCase,
     ValidateCredentialsUseCase,
   ],

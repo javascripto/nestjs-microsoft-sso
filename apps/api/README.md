@@ -1,12 +1,13 @@
 
-# API - Autenticação com JWT e Microsoft (NestJS)
+# API - Autenticação com JWT, Microsoft e Google (NestJS)
 
-Este projeto é um serviço de autenticação desenvolvido em [NestJS](https://nestjs.com/) que oferece login via e-mail/senha (JWT) e login com conta Microsoft (Azure AD). Ele serve como backend para aplicações que precisam de autenticação centralizada e segura.
+Este projeto é um serviço de autenticação desenvolvido em [NestJS](https://nestjs.com/) que oferece login via e-mail/senha (JWT), login com conta Microsoft (Azure AD) e login com conta Google. Ele serve como backend para aplicações que precisam de autenticação centralizada e segura.
 
 ## Funcionalidades
 
 - Login com e-mail e senha (JWT)
 - Login com conta Microsoft (Azure AD)
+- Login com conta Google
 - Emissão de tokens JWT para autenticação
 - Endpoint para obter perfil do usuário autenticado
 - Estrutura modular e fácil de estender
@@ -30,6 +31,7 @@ Configure as seguintes variáveis de ambiente para funcionamento local:
 - `JWT_SECRET` — Segredo para assinar tokens JWT
 - `JWT_EXPIRES_IN` — Tempo de expiração do token (ex: '1d')
 - `AZURE_CLIENT_ID` — Client ID do app registrado no Azure
+- `GOOGLE_CLIENT_ID` — Client ID do app registrado no Google Cloud Console
 - `TEST_OUTLOOK_EMAIL` — E-mail de teste para login Microsoft
 - `TEST_OUTLOOK_USER_NAME` — Nome do usuário de teste
 
@@ -56,6 +58,7 @@ yarn test:cov
 
 - `POST /auth/login` — Login com e-mail e senha (retorna JWT)
 - `POST /auth/login/microsoft` — Login com conta Microsoft (Azure AD, retorna JWT)
+- `POST /auth/login/google` — Login com conta Google (retorna JWT)
 - `GET /auth/me` — Retorna dados do usuário autenticado (JWT)
 - `GET /auth/microsoft/profile` — Retorna perfil do usuário autenticado via Microsoft
 
@@ -64,8 +67,8 @@ yarn test:cov
 1. **Login com e-mail/senha:**
    - Envie e-mail e senha para `/auth/login`.
    - Se válido, retorna um JWT.
-2. **Login com Microsoft:**
-   - Autentique-se via Azure AD e envie o token para `/auth/login/microsoft`.
+2. **Login com Microsoft / Google:**
+   - Autentique-se via Azure AD ou Google e envie o token para `/auth/login/microsoft` ou `/auth/login/google`.
    - O backend valida o token e retorna um JWT próprio.
 
 ## Tecnologias

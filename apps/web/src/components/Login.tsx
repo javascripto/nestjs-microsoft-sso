@@ -1,15 +1,21 @@
 import { MicrosoftLogo } from '@/components/MicrosoftLogo';
 import { Button } from '@/components/ui/button';
-import { exchangeMicrosoftToken, loginWithEmail } from '@/lib/api';
+import {
+  exchangeGoogleToken,
+  exchangeMicrosoftToken,
+  loginWithEmail,
+} from '@/lib/api';
 import { popupRequestConfig } from '@/lib/authConfig';
 import { useAuth } from '@/lib/useAuth';
 import { cn, wait } from '@/lib/utils';
 import { InteractionStatus } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
+import { useGoogleLogin } from '@react-oauth/google';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { GoogleLogo } from './GoogleLogo';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -31,6 +37,28 @@ export default function Login() {
       console.error(e);
     }
   };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      try {
+        setIsLoading(true);
+        const { access_token } = await exchangeGoogleToken(
+          tokenResponse.access_token,
+        );
+        await setToken(access_token);
+        navigate('/dashboard');
+      } catch (error) {
+        console.error('Google login failed', error);
+        toast.error('Google login failed');
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    onError: error => {
+      console.error('Google login error', error);
+      toast.error('Google login failed');
+    },
+  });
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -116,6 +144,21 @@ export default function Login() {
         >
           <MicrosoftLogo className="w-6 h-6 mr-2" />
           <span className="text-base font-medium">Entrar com Microsoft</span>
+        </button>
+
+        <button
+          type="button"
+          disabled={isLoading}
+          onClick={() => handleGoogleLogin()}
+          className={cn(
+            'w-full flex items-center justify-center gap-2',
+            'bg-white border border-gray-300 hover:bg-blue-50 text-gray-800',
+            'font-semibold py-3 px-4 rounded-lg shadow transition-colors duration-150 mb-2',
+            'disabled:opacity-50 disabled:cursor-not-allowed',
+          )}
+        >
+          <GoogleLogo className="w-6 h-6 mr-2" />
+          <span className="text-base font-medium">Entrar com Google</span>
         </button>
 
         <Button

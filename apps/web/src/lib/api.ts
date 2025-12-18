@@ -31,6 +31,14 @@ export function exchangeMicrosoftToken(microsoftToken: string) {
     .then(({ data }) => data);
 }
 
+export function exchangeGoogleToken(googleToken: string) {
+  return api
+    .post<{ access_token: string }>('/auth/login/google', {
+      token: googleToken,
+    })
+    .then(({ data }) => data);
+}
+
 export interface User {
   email: string;
   userId?: string;

@@ -1,8 +1,10 @@
 import type { Configuration, PopupRequest } from '@azure/msal-browser';
 
+const azureClientId = import.meta.env.VITE_AZURE_CLIENT_ID;
+
 export const msalConfig: Configuration = {
   auth: {
-    clientId: import.meta.env.VITE_AZURE_CLIENT_ID,
+    clientId: azureClientId,
     authority: 'https://login.microsoftonline.com/common',
     redirectUri: '/',
   },
@@ -13,5 +15,5 @@ export const msalConfig: Configuration = {
 };
 
 export const popupRequestConfig: PopupRequest = {
-  scopes: [`api://${import.meta.env.VITE_AZURE_CLIENT_ID}/access_as_user`],
+  scopes: [`api://${azureClientId}/access_as_user`],
 };

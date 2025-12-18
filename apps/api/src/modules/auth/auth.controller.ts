@@ -26,6 +26,11 @@ export class AuthController {
     return this.authService.loginWithMicrosoft(user); // Exchanges for API JWT
   }
 
+  @Post('login/google')
+  loginGoogle(@Body('token') token: string): Promise<{ access_token: string }> {
+    return this.authService.loginWithGoogle(token);
+  }
+
   @Get('me')
   @UseGuards(AuthGuard('jwt'))
   me(@Req() { user }: Request): User {

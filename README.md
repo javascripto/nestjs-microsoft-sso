@@ -1,7 +1,6 @@
+# MS SSO - Monorepo (NestJS + React + Microsoft & Google SSO)
 
-# MS SSO - Monorepo (NestJS + React + Microsoft SSO)
-
-Este repositório é um monorepo que reúne uma API de autenticação (NestJS) e um frontend (React) para login com e-mail/senha (JWT) e Microsoft (Azure AD). O objetivo é fornecer um exemplo completo de Single Sign-On (SSO) moderno usando tecnologias populares e integração com a Microsoft.
+Este repositório é um monorepo que reúne uma API de autenticação (NestJS) e um frontend (React) para login com e-mail/senha (JWT), Microsoft (Azure AD) e Google. O objetivo é fornecer um exemplo completo de Single Sign-On (SSO) moderno usando tecnologias populares e integração com Microsoft e Google.
 
 ## Estrutura do Projeto
 
@@ -12,6 +11,7 @@ Este repositório é um monorepo que reúne uma API de autenticação (NestJS) e
 
 - Login com e-mail/senha (JWT)
 - Login com conta Microsoft (Azure AD)
+- Login com conta Google
 - Proteção de rotas no frontend
 - Contexto global de autenticação
 - Estrutura modular e fácil de adaptar
@@ -39,16 +39,17 @@ Este repositório é um monorepo que reúne uma API de autenticação (NestJS) e
 
 ## Fluxo de Autenticação
 
-1. O usuário pode logar com e-mail/senha ou com sua conta Microsoft.
+1. O usuário pode logar com e-mail/senha, conta Microsoft ou conta Google.
 2. O frontend obtém um JWT da API e protege as rotas.
-3. O backend valida tokens JWT e tokens do Azure AD.
+3. O backend valida tokens JWT e tokens do Azure AD / Google.
 
 ## Tecnologias
 
 - [NestJS](https://nestjs.com/) (API)
 - [React 19](https://react.dev/) + [Vite](https://vitejs.dev/) (Web)
 - [MSAL](https://github.com/AzureAD/microsoft-authentication-library-for-js) (Microsoft Auth)
-- [Passport](http://www.passportjs.org/) (JWT/Azure AD)
+- [Google Auth](https://developers.google.com/identity/gsi/web) (Google SSO)
+- [Passport](http://www.passportjs.org/) (JWT/Azure AD/Google)
 - [TypeScript](https://www.typescriptlang.org/)
 - [TailwindCSS](https://tailwindcss.com/)
 
